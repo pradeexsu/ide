@@ -1,8 +1,15 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { NavBar } from "./components/NavBar/NavBar";
+import { Loader } from "./components/Common";
 
 const App = () => {
-  return <h1>IDE</h1>;
+  return (
+    <div>
+      <NavBar />
+      <Loader />
+    </div>
+  );
 };
 
 const container = document.getElementById("root");
