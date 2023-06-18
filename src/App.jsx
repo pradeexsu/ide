@@ -1,13 +1,17 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { NavBar } from "./components/NavBar/NavBar";
-import { Loader } from "./components/Common";
+import { IOBar } from "./components/IOPannel";
+import "allotment/dist/style.css";
+import { Editor } from "./components/Editor";
 
 const App = () => {
   return (
-    <div>
+    <div className="inset-y-0 min-h-screen w-full ">
       <NavBar />
-      <Loader />
+      {/* <Loader /> */}
+      <Editor />
+      <IOBar />
     </div>
   );
 };
