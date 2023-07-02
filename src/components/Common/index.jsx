@@ -6,7 +6,7 @@ export const Button = ({ iconUrl, text, isPrimary, onClick }) =>
       className="my-auto mr-2 flex h-8 select-none gap-1 rounded-full border-none bg-pink-500/60 py-1 px-4 text-white duration-200 hover:bg-purple-400/50 active:bg-red-600/75"
       onClick={onClick}
     >
-      <img src={iconUrl} className="mr-1 h-5" />
+      <img src={iconUrl} className="mr-1 h-5" alt="icon" />
       {text}
     </button>
   ) : (
@@ -14,13 +14,17 @@ export const Button = ({ iconUrl, text, isPrimary, onClick }) =>
       className="my-auto mr-2 flex h-8 select-none rounded-full border-none bg-white/5 py-[6px] px-[14px]   text-white hover:bg-white/10"
       onClick={onClick}
     >
-      <img src={iconUrl} className="h-5" />
+      <img src={iconUrl} className="h-5" alt="icon" />
       {text && <span className="ml-2">{text}</span>}
     </button>
   );
 
-export const DropDown = ({ arr }) => (
-  <select className="my-auto mr-2 flex h-8 select-none appearance-none gap-1 rounded-full border-none bg-white/5 py-1 px-8 text-white outline-none hover:bg-white/10">
+export const DropDown = ({ arr, onChange, value }) => (
+  <select
+    className="my-auto mr-2 flex h-8 select-none appearance-none gap-1 rounded-full border-none bg-white/5 py-1 px-8 text-white outline-none hover:bg-white/10"
+    onChange={(e) => onChange(e.nativeEvent.target.value)}
+    value={value}
+  >
     {Object.keys(arr).map((key) => (
       <option className="drop-down-item" value={key} key={key}>
         {arr[key]}
@@ -35,7 +39,7 @@ export const CloseIcon = ({ onClick }) => (
     }
     onClick={onClick}
   >
-    <img className="h-6 w-6" src={closeIcon} />
+    <img className="h-6 w-6" src={closeIcon} alt="icon" />
   </span>
 );
 

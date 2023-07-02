@@ -1,11 +1,11 @@
 .cm-scroller {
-  height: 95vh !important;
+  height: 96vh !important;
   font-size: 16px;
 }
 .cm-selectionBackground {
-  background-color: #faf3 !important;
+  background-color: #0005 !important;
 }
 
 .cm-activeLine {
-  background-color: #faf1 !important;
+  background-color: #0007 !important;
 }

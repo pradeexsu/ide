@@ -17,6 +17,6 @@ export const fullScreenIcon =
 export const lang = {
   cpp: "C++",
   java: "Java",
-  python3: "Python 3",
-  nodejs: "NodeJS",
+  python: "Python",
+  node: "NodeJS",
 };
