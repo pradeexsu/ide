@@ -33,14 +33,12 @@ export const DropDown = ({ arr, onChange, value }) => (
   </select>
 );
 export const CloseIcon = ({ onClick }) => (
-  <span
-    className={
-      "relative top-14 z-10 float-right mr-5 ml-auto h-10 w-10 select-none rounded-full p-2 text-center  hover:bg-[#fff1] active:bg-[#fff2]"
-    }
+  <button
+    className="relative top-14 z-10 float-right mr-5 ml-auto h-10 w-10 select-none rounded-full p-2 text-center  hover:bg-[#fff1] active:bg-[#fff2]"
     onClick={onClick}
   >
     <img className="h-6 w-6" src={closeIcon} alt="icon" />
-  </span>
+  </button>
 );
 
 export const Loader = ({ hidden }) => (

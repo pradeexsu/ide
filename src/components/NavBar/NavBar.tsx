@@ -30,8 +30,8 @@ export const NavBar = () => {
 
   const saveCodeToServer = async () => {
     try {
-      const code1 = view.state.doc.toString();
-      const res = await saveCode(language, code1);
+      const code1 = view?.state?.doc.toString();
+      const res = await saveCode({ lang: language, code: code1 });
       console.log(res);
       navigate(`/${res.id}`);
     } catch (err) {

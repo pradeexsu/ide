@@ -1,6 +1,24 @@
 import { create } from "zustand";
 
-export const useStore = create((set) => ({
+interface Props {
+  showIo: boolean;
+  toggleShowIo: () => void;
+  setShowIo: (value: boolean) => void;
+  language: string;
+  setLanguage: (value: string) => void;
+  code: string;
+  setCode: (value: string) => void;
+  view: any;
+  setView: (value: any) => void;
+  input: string;
+  setInput: (value: string) => void;
+  output: string;
+  setOutput: (value: string) => void;
+  executing: boolean;
+  setExecuting: (value: boolean) => void;
+}
+
+export const useStore = create<Props>((set) => ({
   showIo: false,
   toggleShowIo: () => set((state) => ({ showIo: !state.showIo })),
   setShowIo: (value) => set(() => ({ showIo: value })),
@@ -8,7 +26,7 @@ export const useStore = create((set) => ({
   setLanguage: (value) => set(() => ({ language: value })),
   code: "",
   setCode: (value) => set(() => ({ code: value })),
-  view: null,
+  view: any,
   setView: (value) => set(() => ({ view: value })),
   input: "",
   setInput: (value) => set(() => ({ input: value })),

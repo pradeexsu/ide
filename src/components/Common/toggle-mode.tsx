@@ -13,12 +13,12 @@ const ThemeModeToggler = () => {
     play();
   };
   return (
-    <span
+    <button
       onClick={toggleMode}
       className="absolute my-2 select-none text-gray-50 [&>*]:outline-none"
     >
       {(dark && <MoonIcon />) || <SunIcon />}
-    </span>
+    </button>
   );
 };
 
