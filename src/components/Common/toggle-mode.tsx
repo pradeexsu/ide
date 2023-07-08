@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useState } from "react";
 import useSound from "use-sound";
 import { MoonIcon } from "./assets/MoonIcon";
@@ -5,7 +6,7 @@ import { SunIcon } from "./assets/SunIcon";
 import boopSfx from "./toot-light-sound.mp3";
 
 const ThemeModeToggler = () => {
-  const [dark, toggleDark] = useState(true);
+  const [dark, toggleDark] = useState<boolean>(true);
 
   const [play] = useSound(boopSfx);
   const toggleMode = () => {

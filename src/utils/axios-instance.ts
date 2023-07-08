@@ -40,10 +40,10 @@ export { axiosInstance };
 //     return response;
 // }
 
-const onResponseError = (error: AxiosError): Promise<AxiosError> => {
-  console.error(`[response error] [${JSON.stringify(error)}]`);
-  return Promise.reject(error);
-};
+// const onResponseError = (error: AxiosError): Promise<AxiosError> => {
+//   console.error(`[response error] [${JSON.stringify(error)}]`);
+//   return Promise.reject(error);
+// };
 
 // export function setupInterceptorsTo(axiosInstance: AxiosInstance): AxiosInstance {
 //     axiosInstance.interceptors.request.use(onRequest, onRequestError);

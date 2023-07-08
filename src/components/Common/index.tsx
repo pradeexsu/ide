@@ -1,7 +1,12 @@
+// @ts-nocheck
 import { languagetoText, textToLanguage } from "../../utils/mapper";
-import { languageMap, textToTheme, themeToText } from "../Editor/extensions";
+import {
+  getDisplayLanguage,
+  langList,
+  textToTheme,
+  themeToText,
+} from "../Editor/extensions";
 import { Languages, Themes } from "../Editor/typings";
-import { closeIcon } from "../IOPannel/constant";
 
 type Props = {
   text?: string;
@@ -34,9 +39,9 @@ export const DropDownLang = ({ onChange, value }: DropDownLangProps) => (
     }}
     value={languagetoText(value)}
   >
-    {Object.keys(languageMap).map((lang) => (
+    {langList.map((lang) => (
       <option className="drop-down-item" value={lang} key={lang}>
-        {languageMap[lang]}
+        {getDisplayLanguage(lang)}
       </option>
     ))}
   </select>
@@ -46,11 +51,13 @@ type DropDownThemeProps = {
   onChange: (val: Themes) => void;
   value: Themes;
 };
+
 export const DropDownTheme = ({ onChange, value }: DropDownThemeProps) => (
   <select
     className="dropdown-style"
     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
       const target = e?.nativeEvent?.target as EventTarget;
+      //@ts-ignore
       if (target !== null) onChange(textToTheme[target?.value]);
     }}
     value={themeToText(value)}

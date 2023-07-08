@@ -8,6 +8,7 @@ import NotificationLane from "../Common/notification-lane";
 import { languagetoText } from "../../utils/mapper";
 import { Languages, Themes } from "../Editor/typings";
 import ThemeModeToggler from "../Common/toggle-mode";
+import { navIcon } from "./constants";
 
 export const NavBar = () => {
   const {
@@ -76,7 +77,7 @@ export const NavBar = () => {
       <NotificationLane />
       <nav className="flex justify-between bg-[#191c1f]">
         <div className="start my-auto flex flex-wrap gap-8">
-          <img src="/public/favicon.png" alt="p-logo" className="h-12" />
+          <img src={navIcon} alt="p-logo" className="h-12" />
         </div>
 
         <div className="flex-end mr-5  flex gap-4 ">

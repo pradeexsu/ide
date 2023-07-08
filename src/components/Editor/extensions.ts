@@ -81,10 +81,17 @@ export function themeToText(theme: Themes): string {
       return "nord";
   }
 }
+export const langList = ["cpp", "java", "node", "python"];
 
-export const languageMap = {
-  cpp: "C++",
-  java: "Java",
-  node: "Javascript",
-  python: "Python",
-};
+export function getDisplayLanguage(lang: string) {
+  switch (lang) {
+    case "cpp":
+      return "C++";
+    case "java":
+      return "Java";
+    case "node":
+      return "Javascript";
+    case "python":
+      return "Python";
+  }
+}

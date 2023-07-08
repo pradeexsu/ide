@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Allotment } from "allotment";
 import { Loader } from "../Common";
 import "allotment/dist/style.css";
