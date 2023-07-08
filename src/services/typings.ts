@@ -1,15 +1,26 @@
-type CodeSaveRequest = {
-  code: string;
+export type CodeSaveRequest = {
+  code?: string;
   lang: string;
 };
 
-type CodeSaveResponse = {
+export type CodeSaveResponse = {
   id: number;
   message: string;
 };
 
-type CodeResponse = {
+export type CodeResponse = {
   code: string;
   lang: string;
   message: string;
+};
+
+export type ExecuteRequest = {
+  lang: string;
+  code: string;
+  input: string;
+};
+
+export type ExecuteResponse = {
+  message: string;
+  output?: string;
 };

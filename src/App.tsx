@@ -1,37 +1,24 @@
-import React, { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { NavBar } from "./components/NavBar/NavBar";
-import { IOBar } from "./components/IOPannel";
 import "allotment/dist/style.css";
-import { Editor } from "./components/Editor";
-import BgTecture from "./components/Asset/BgTexture";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-const Ide = () => {
-  return (
-    <div className="inset-y-0 min-h-screen w-full ">
-      <NavBar />
-      <BgTecture />
-      <Editor />
-      <IOBar />
-    </div>
-  );
-};
+import Ide from "./components/Ide/Ide";
+import ReactDOM from "react-dom/client";
+import React from "react";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 const App = () => {
   return (
-    <StrictMode>
+    <React.StrictMode>
       <BrowserRouter>
-        XXX
-        <Routes>
-          <Route path="/" element={<Ide />} />
-          <Route path="/:codeId" element={<Ide />} />
-        </Routes>
+        <ErrorBoundary>
+          <Routes>
+            <Route path="/" element={<Ide />} />
+            <Route path="/:codeId" element={<Ide />} />
+          </Routes>
+        </ErrorBoundary>
       </BrowserRouter>
-    </StrictMode>
+    </React.StrictMode>
   );
 };
 
-const container = document.getElementById("root");
-const root = createRoot(container!);
-root.render(React.createElement(App));
+const root = document.getElementById("root") as HTMLElement;
+ReactDOM.createRoot(root).render(<App />);

@@ -7,6 +7,7 @@ module.exports = {
         loading1: "andydots 1.2s infinite ease-in-out both",
         loading2: "andydots 1.2s infinite .2s ease-in-out both",
         loading3: "andydots 1.2s infinite .4s ease-in-out both",
+        text: "text .5s 0 1s  linear",
       },
       keyframes: {
         andydots: {
@@ -17,6 +18,20 @@ module.exports = {
             transform: "scale(1)",
           },
         },
+        text: {
+          "0%, 100%": {
+            "background-size": "200% 200%",
+            "background-position": "left center",
+          },
+          "50%": {
+            "background-size": "200% 200%",
+            "background-position": "right center",
+          },
+        },
+      },
+      fontFamily: {
+        display: ["Oswald"],
+        robo: ["'Roboto', sans-serif;"],
       },
     },
   },

@@ -1,27 +1,40 @@
-import { useEffect, useState } from "react";
-import { closeIcon } from "../IOPannel/constant";
+import { useEffect } from "react";
+import { useEditorStore } from "../../store/store";
+import { NotificationType } from "../../store/typings";
 
 const NotificationLane = () => {
-  const [show, setShow] = useState(true);
+  const { notification, clearNotification } = useEditorStore();
 
   useEffect(() => {
-    setTimeout(() => {
-      setShow(false);
-    }, 2000);
-  }, []);
+    if (!notification) return;
+    const timeout = setTimeout(clearNotification, 4000);
+    return () => clearTimeout(timeout);
+  }, [notification, clearNotification]);
+
+  const getNotificationColor = (type: NotificationType) => {
+    switch (type) {
+      case NotificationType.Error:
+        return "bg-red-500";
+      case NotificationType.Success:
+        return "bg-green-500";
+      case NotificationType.Warning:
+        return "bg-orange-500";
+      case NotificationType.None:
+        return "bg-blue-500";
+    }
+  };
   return (
-    show && (
-      <nav className="flex h-12 justify-between bg-red-500">
+    !!notification && (
+      <nav
+        className={`flex h-12 justify-between ${getNotificationColor(
+          notification?.type
+        )}`}
+      >
         <div className="my-auto w-full">
-          <div className="text-center  text-white">
-            Some Notification goes here...
+          <div className="text-center  text-black ">
+            {notification?.message}
           </div>
         </div>
-        <img
-          className="py-auto my-3 mr-10 h-6 w-6"
-          src={closeIcon}
-          alt="icon"
-        />
       </nav>
     )
   );

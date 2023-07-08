@@ -1,17 +1,36 @@
-import { nord } from "cm6-theme-nord";
-import { EditorView, basicSetup } from "codemirror";
+import { EditorView } from "codemirror";
+
 import { useEffect, useRef } from "react";
 import "./style.css";
-import { useStore } from "../../store/store";
-import { languages } from "./extensions";
+import { useEditorStore } from "../../store/store";
 import { useParams } from "react-router-dom";
-import { getCode } from "../../services/saveCode";
+import { FetchStatus, useSavedCode } from "../../utils/hooks/useSavedCode";
+import { textToLanguage } from "../../utils/mapper";
+import {
+  extensions,
+  getLanguageExtention,
+  getThemeExtention,
+} from "./extensions";
 
 export const Editor = () => {
-  const editorRef = useRef();
+  const editorRef = useRef<HTMLElement>(null);
   const { codeId } = useParams();
+  const {
+    fetchStatus,
+    code: fetchedCode,
+    lang: fetchedLang,
+  } = useSavedCode({ codeId });
 
-  const { language, setView, setLanguage, setCode, code } = useStore();
+  const {
+    language,
+    setView,
+    setLanguage,
+    setCode,
+    code,
+    theme,
+    setErrorNotification,
+    setSuccessNotification,
+  } = useEditorStore();
 
   useEffect(() => {
     if (editorRef.current === null) return;
@@ -20,28 +39,29 @@ export const Editor = () => {
       parent: editorRef.current,
       doc: code,
       extensions: [
-        basicSetup,
-        nord,
-        languages[language],
-        EditorView.editable.of(true),
+        ...extensions,
+        getThemeExtention(theme),
+        getLanguageExtention(language),
       ],
     });
     setView(view1);
     return () => {
       view1.destroy();
     };
-  }, [editorRef.current, code, language]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [editorRef.current, code, language, theme]);
 
   useEffect(() => {
-    async function fetchData() {
-      const res = await getCode(codeId);
-      const { code, lang } = res;
-      setLanguage(lang);
-      setCode(code);
-      console.log(res);
+    if (codeId === undefined) return;
+    if (fetchStatus === FetchStatus.Success && fetchedCode && fetchedLang) {
+      setCode(fetchedCode);
+      setLanguage(textToLanguage(fetchedLang));
+      setSuccessNotification("Code Loadded Successfully! 🤩");
+    } else if (fetchStatus === FetchStatus.Failed) {
+      setErrorNotification("Failed to fetch Code from Server 😶‍🌫️");
     }
-    if (codeId) fetchData();
-  }, [codeId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [fetchStatus]);
 
   return <section ref={editorRef} />;
 };

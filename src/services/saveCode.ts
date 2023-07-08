@@ -1,9 +1,10 @@
 import { axiosInstance } from "../utils/axios-instance";
+import { CodeResponse, CodeSaveRequest, CodeSaveResponse } from "./typings";
 
 export const saveCode = async (
   requestBody: CodeSaveRequest
 ): Promise<CodeSaveResponse> => {
-  const res = await axiosInstance.post(`v1/api/save`);
+  const res = await axiosInstance.post(`v1/api/save`, requestBody);
   return res.data as CodeSaveResponse;
 };
 

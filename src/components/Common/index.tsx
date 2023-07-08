@@ -1,47 +1,69 @@
+import { languagetoText, textToLanguage } from "../../utils/mapper";
+import { languageMap, textToTheme, themeToText } from "../Editor/extensions";
+import { Languages, Themes } from "../Editor/typings";
 import { closeIcon } from "../IOPannel/constant";
 
-export const Button = ({ iconUrl, text, isPrimary, onClick }) =>
-  isPrimary ? (
-    <button
-      className="my-auto mr-2 flex h-8 select-none gap-1 rounded-full border-none bg-pink-500/60 py-1 px-4 text-white duration-200 hover:bg-purple-400/50 active:bg-red-600/75"
-      onClick={onClick}
-    >
-      <img src={iconUrl} className="mr-1 h-5" alt="icon" />
-      {text}
-    </button>
-  ) : (
-    <button
-      className="my-auto mr-2 flex h-8 select-none rounded-full border-none bg-white/5 py-[6px] px-[14px]   text-white hover:bg-white/10"
-      onClick={onClick}
-    >
-      <img src={iconUrl} className="h-5" alt="icon" />
-      {text && <span className="ml-2">{text}</span>}
-    </button>
-  );
+type Props = {
+  text?: string;
+  onClick: () => void;
+};
 
-export const DropDown = ({ arr, onChange, value }) => (
+export const Button = ({ text, onClick }: Props) => (
+  <button className="btn btn-style py-[2px]" onClick={onClick}>
+    {text && <span className="ml-2 ">{text}</span>}
+  </button>
+);
+
+export const PlayButton = ({ onClick }: Props) => (
+  <button className="btn play-btn-style" onClick={onClick}>
+    <span className="mr-2 py-[2px] text-lg">▶</span>
+    <span className="py-[2px]">Play</span>
+  </button>
+);
+
+type DropDownLangProps = {
+  onChange: (val: Languages) => void;
+  value: Languages;
+};
+export const DropDownLang = ({ onChange, value }: DropDownLangProps) => (
   <select
-    className="my-auto mr-2 flex h-8 select-none appearance-none gap-1 rounded-full border-none bg-white/5 py-1 px-8 text-white outline-none hover:bg-white/10"
-    onChange={(e) => onChange(e.nativeEvent.target.value)}
-    value={value}
+    className="dropdown-style"
+    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+      const target = e?.nativeEvent?.target as EventTarget;
+      if (target !== null) onChange(textToLanguage(target?.value as string));
+    }}
+    value={languagetoText(value)}
   >
-    {Object.keys(arr).map((key) => (
-      <option className="drop-down-item" value={key} key={key}>
-        {arr[key]}
+    {Object.keys(languageMap).map((lang) => (
+      <option className="drop-down-item" value={lang} key={lang}>
+        {languageMap[lang]}
       </option>
     ))}
   </select>
 );
-export const CloseIcon = ({ onClick }) => (
-  <button
-    className="relative top-14 z-10 float-right mr-5 ml-auto h-10 w-10 select-none rounded-full p-2 text-center  hover:bg-[#fff1] active:bg-[#fff2]"
-    onClick={onClick}
+
+type DropDownThemeProps = {
+  onChange: (val: Themes) => void;
+  value: Themes;
+};
+export const DropDownTheme = ({ onChange, value }: DropDownThemeProps) => (
+  <select
+    className="dropdown-style"
+    onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
+      const target = e?.nativeEvent?.target as EventTarget;
+      if (target !== null) onChange(textToTheme[target?.value]);
+    }}
+    value={themeToText(value)}
   >
-    <img className="h-6 w-6" src={closeIcon} alt="icon" />
-  </button>
+    {Object.keys(textToTheme).map((theme) => (
+      <option className="drop-down-item" value={theme} key={theme}>
+        {theme}
+      </option>
+    ))}
+  </select>
 );
 
-export const Loader = ({ hidden }) => (
+export const Loader = ({ hidden }: { hidden: boolean }) => (
   <div
     className="absolute mr-10 flex  flex-wrap p-5 text-center"
     hidden={hidden}
@@ -51,20 +73,3 @@ export const Loader = ({ hidden }) => (
     <span className="h-5 w-5 animate-loading3 rounded-full bg-[#f15c6c]" />
   </div>
 );
-
-// --bs-blue: #BADA55;
-// --bs-blue: #0d6efd;
-// --bs-indigo: #6610f2;
-// --bs-purple: #6f42c1;
-// --bs-pink: #d63384;
-// --bs-red: #dc3545;
-// --bs-orange: #fd7e14;
-// --bs-yellow: #ffc107;
-// --bs-green: #198754;
-// --bs-teal: #20c997;
-// --bs-cyan: #0dcaf0;
-
-// --primary-dark: #f15c6c;
-// --primary: #c26dab;
-// --secondary: #6666a4;
-// --trertiary: #78a1d1;

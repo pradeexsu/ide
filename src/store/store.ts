@@ -1,32 +1,19 @@
 import { create } from "zustand";
+import { NotificationType, StoreType } from "./typings";
+import { Languages, Themes } from "../components/Editor/typings";
+import { getTemplate } from "../components/Editor/constant";
 
-interface Props {
-  showIo: boolean;
-  toggleShowIo: () => void;
-  setShowIo: (value: boolean) => void;
-  language: string;
-  setLanguage: (value: string) => void;
-  code: string;
-  setCode: (value: string) => void;
-  view: any;
-  setView: (value: any) => void;
-  input: string;
-  setInput: (value: string) => void;
-  output: string;
-  setOutput: (value: string) => void;
-  executing: boolean;
-  setExecuting: (value: boolean) => void;
-}
-
-export const useStore = create<Props>((set) => ({
+export const useEditorStore = create<StoreType>((set) => ({
   showIo: false,
   toggleShowIo: () => set((state) => ({ showIo: !state.showIo })),
+  theme: Themes.Nord,
+  setTheme: (theme) => set(() => ({ theme })),
   setShowIo: (value) => set(() => ({ showIo: value })),
-  language: "cpp",
+  language: Languages.Cpp,
   setLanguage: (value) => set(() => ({ language: value })),
-  code: "",
+  code: getTemplate(Languages.Cpp),
   setCode: (value) => set(() => ({ code: value })),
-  view: any,
+  view: undefined,
   setView: (value) => set(() => ({ view: value })),
   input: "",
   setInput: (value) => set(() => ({ input: value })),
@@ -34,4 +21,31 @@ export const useStore = create<Props>((set) => ({
   setOutput: (value) => set(() => ({ output: value })),
   executing: false,
   setExecuting: (value) => set(() => ({ executing: value })),
+  notification: undefined,
+  setNotification: (value) => set(() => ({ notification: value })),
+  clearNotification: () =>
+    set(() => ({
+      notification: undefined,
+    })),
+  setErrorNotification: (value: string) =>
+    set(() => ({
+      notification: {
+        type: NotificationType.Error,
+        message: value,
+      },
+    })),
+  setSuccessNotification: (value: string) =>
+    set(() => ({
+      notification: {
+        type: NotificationType.Success,
+        message: value,
+      },
+    })),
+  setWarnNotification: (value: string) =>
+    set(() => ({
+      notification: {
+        type: NotificationType.Warning,
+        message: value,
+      },
+    })),
 }));
