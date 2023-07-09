@@ -1,6 +1,6 @@
 const BgTexture = () => (
   <svg
-    className="pointer-events-none fixed isolate z-50 opacity-70 mix-blend-soft-light"
+    className="pointer-events-none fixed isolate z-50 opacity-50 mix-blend-soft-light  "
     width="100%"
     height="100%"
   >

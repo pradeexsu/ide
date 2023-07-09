@@ -18,3 +18,15 @@ export const execute = async ({
     console.error(e);
   }
 };
+
+export const ping = async (): Promise<boolean> => {
+  try {
+    const res = await axiosInstance.get(`ping`);
+    const status = res.status;
+    if (status <= 299) return true;
+    return false;
+  } catch (e) {
+    console.error(e);
+    return false;
+  }
+};

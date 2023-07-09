@@ -8,7 +8,9 @@ import NotificationLane from "../Common/notification-lane";
 import { languagetoText } from "../../utils/mapper";
 import { Languages, Themes } from "../Editor/typings";
 import ThemeModeToggler from "../Common/toggle-mode";
-import { navIcon } from "./constants";
+import { Ballon } from "../Common/assets/Logo";
+import { useHeartBeat } from "../../utils/hooks/useHeartBeat";
+import { FetchStatus } from "../../utils/hooks/useSavedCode";
 
 export const NavBar = () => {
   const {
@@ -25,6 +27,8 @@ export const NavBar = () => {
     setExecuting,
     setErrorNotification,
   } = useEditorStore();
+
+  const heartBeat = useHeartBeat();
 
   const navigate = useNavigate();
 
@@ -72,14 +76,40 @@ export const NavBar = () => {
     }
   };
 
+  const getHeartBeatSatusColor = () => {
+    switch (heartBeat) {
+      case FetchStatus.None:
+        return "bg-orange-400";
+      case FetchStatus.Success:
+        return "bg-green-500";
+      case FetchStatus.Failed:
+        return "bg-red-700";
+      case FetchStatus.Fetching:
+        return "bg-orange-400";
+    }
+  };
   return (
     <div>
       <NotificationLane />
-      <nav className="flex justify-between bg-[#191c1f]">
-        <div className="start my-auto flex flex-wrap gap-8">
-          <img src={navIcon} alt="p-logo" className="h-12" />
-        </div>
-
+      <nav className="via-20% flex  justify-between bg-black backdrop-blur-xl ">
+        <span>
+          <span className="start flex h-14">
+            <span className="w-30 mt-1 ml-[-35px] h-0 scale-[.45]">
+              <Ballon />
+            </span>
+            <span
+              className="relative ml-[-50px] mt-2 flex h-4 w-4"
+              title={"backend connected"}
+            >
+              <span
+                className={`absolute inline-flex h-4 w-4 animate-beat rounded-full ${getHeartBeatSatusColor()} opacity-75`}
+              ></span>
+              <span
+                className={`relative m-1 inline-flex h-2 w-2 rounded-full  ${getHeartBeatSatusColor()}`}
+              ></span>
+            </span>
+          </span>
+        </span>
         <div className="flex-end mr-5  flex gap-4 ">
           <DropDownLang onChange={langChangeHandler} value={language} />
           <DropDownTheme onChange={themeChangeHandler} value={theme} />

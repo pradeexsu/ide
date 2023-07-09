@@ -8,8 +8,15 @@ module.exports = {
         loading2: "andydots 1.2s infinite .2s ease-in-out both",
         loading3: "andydots 1.2s infinite .4s ease-in-out both",
         text: "text .5s 0 1s  linear",
+        beat: "pingg 3s infinite cubic-bezier(0, 0, 0.2, 1)",
       },
       keyframes: {
+        pingg: {
+          "100%": {
+            transform: "scale(2)",
+            opacity: 0,
+          },
+        },
         andydots: {
           "0%, 80%, 100%": {
             transform: "scale(0)",

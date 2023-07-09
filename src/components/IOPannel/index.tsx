@@ -24,7 +24,7 @@ export const IOBar = () => {
               onChange={(event) => setInput(event.target.value)}
             />
           </Allotment.Pane>
-          <Allotment.Pane snap>
+          <Allotment.Pane snap >
             {<Loader hidden={executing} />}
             <textarea
               className="h-full w-full resize-none bg-[#000d] p-4 text-white/60 outline-none selection:bg-[#6f42c1]"
