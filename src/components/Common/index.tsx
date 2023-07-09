@@ -57,7 +57,6 @@ export const DropDownTheme = ({ onChange, value }: DropDownThemeProps) => (
     className="dropdown-style"
     onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
       const target = e?.nativeEvent?.target as EventTarget;
-      //@ts-ignore
       if (target !== null) onChange(textToTheme[target?.value]);
     }}
     value={themeToText(value)}

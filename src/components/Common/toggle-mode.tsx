@@ -1,4 +1,4 @@
-// @ts-nocheck
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useState } from "react";
 import useSound from "use-sound";
 import { MoonIcon } from "./assets/MoonIcon";
