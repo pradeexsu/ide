@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { getCode } from "../../services/saveCode";
-
 type Props = {
   codeId: string | undefined;
 };
@@ -18,17 +17,23 @@ export const useSavedCode = ({ codeId }: Props) => {
   useEffect(() => {
     async function fetchData(): Promise<void> {
       try {
-        if (codeId === undefined || isNaN(Number(codeId))) {
+        if (codeId === undefined) {
           setFetchStatus(FetchStatus.None);
+          return;
+        }else if(isNaN(Number(codeId))){
+          setFetchStatus(FetchStatus.Failed);
           return;
         }
         setFetchStatus(FetchStatus.Fetching);
         const res = await getCode(Number(codeId));
-        const { code, lang, message } = res;
-        if (message) console.log(message);
-        setLang(lang);
-        setCode(code);
-        setFetchStatus(FetchStatus.Success);
+        if(res?.success && res?.data!==undefined){
+          const data = res?.data;
+          setLang(data?.lang);
+          setCode(data?.code);
+          setFetchStatus(FetchStatus.Success);
+        }else{
+          setFetchStatus(FetchStatus.Failed);
+        }
       } catch (error) {
         setFetchStatus(FetchStatus.Failed);
       }

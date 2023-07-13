@@ -1,10 +1,7 @@
 import Axios, { AxiosError, AxiosResponse } from "axios";
 
-// const baseURL = process.env.REACT_APP_API_URL;
-const baseURL = "http://localhost:3000/";
-
 const axiosInstance = Axios.create({
-  baseURL: baseURL,
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
 const successHandler = (response: AxiosResponse) => {

@@ -69,10 +69,9 @@ export const DropDownTheme = ({ onChange, value }: DropDownThemeProps) => (
   </select>
 );
 
-export const Loader = ({ hidden }: { hidden: boolean }) => (
+export const Loader = () => (
   <div
     className="absolute ml-[40%] mt-[5%]  flex flex-wrap p-5"
-    hidden={hidden}
   >
     <span className="h-5 w-5 animate-loading1 rounded-full  bg-[#f15c6c]" />
     <span className="h-5 w-5 animate-loading2 rounded-full bg-[#f15c6c]" />

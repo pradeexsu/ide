@@ -29,22 +29,23 @@ export const NavBar = () => {
   } = useEditorStore();
 
   const heartBeat = useHeartBeat();
-
   const navigate = useNavigate();
 
   const saveCodeToServer = async () => {
     try {
       const code1 = view?.state?.doc?.toString();
-
       const res = await saveCode({
         lang: languagetoText(language),
         code: code1,
       });
-      console.log(res);
-      navigate(`/${res?.id}`);
+      if(res?.success && res?.data?.id){
+        navigate(`/${res?.data?.id}`);
+      }else{
+        void setErrorNotification(res?.errorMessage || 'Something went wrong 😶‍🌫️');
+      }
+
     } catch (err) {
       setErrorNotification("something went wrong! try again later");
-      navigate("/");
     }
   };
 
@@ -67,12 +68,17 @@ export const NavBar = () => {
         code,
         input,
       });
-      setOutput(data?.output || "");
+
+      if(data?.success){
+        setOutput(data?.data?.output || '')
+      }else{
+        setErrorNotification(data?.errorMessage || 'Something went wrong ')        
+      }
+      setShowIo(true);
     } catch (err) {
       setErrorNotification("something went wrong! try again later");
     } finally {
       setExecuting(false);
-      setShowIo(true);
     }
   };
 

@@ -1,5 +1,4 @@
 import { EditorView } from "codemirror";
-
 import { useEffect, useRef } from "react";
 import "./style.css";
 import { useEditorStore } from "../../store/store";
@@ -11,6 +10,7 @@ import {
   getLanguageExtention,
   getThemeExtention,
 } from "./extensions";
+import { useNavigate } from "react-router-dom";
 
 export const Editor = () => {
   const editorRef = useRef<HTMLElement>(null);
@@ -20,6 +20,7 @@ export const Editor = () => {
     code: fetchedCode,
     lang: fetchedLang,
   } = useSavedCode({ codeId });
+  const navigate = useNavigate();
 
   const {
     language,
@@ -59,6 +60,7 @@ export const Editor = () => {
       setSuccessNotification("Code Loadded Successfully! 🤩");
     } else if (fetchStatus === FetchStatus.Failed) {
       setErrorNotification("Failed to fetch Code from Server 😶‍🌫️");
+      navigate('/')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchStatus]);

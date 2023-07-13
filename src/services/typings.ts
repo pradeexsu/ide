@@ -3,16 +3,18 @@ export type CodeSaveRequest = {
   lang: string;
 };
 
-export type CodeSaveResponse = {
-  id: number;
-  message: string;
+export type CodeResponse = {
+  data?:    CodeData;
+  success: boolean;
+  errorMessage?: string;
 };
 
-export type CodeResponse = {
-  code: string;
-  lang: string;
-  message: string;
-};
+export interface CodeData {
+  id:         number;
+  code:       string;
+  lang:       string;
+  created_on: Date;
+}
 
 export type ExecuteRequest = {
   lang: string;
@@ -21,6 +23,13 @@ export type ExecuteRequest = {
 };
 
 export type ExecuteResponse = {
-  message: string;
-  output?: string;
+  data?:    ExecData;
+  success: boolean;
+  errorMessage?: string;
 };
+
+
+export interface ExecData {
+  output: string;
+  error:  boolean;
+}

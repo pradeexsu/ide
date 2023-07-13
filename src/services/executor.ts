@@ -12,7 +12,7 @@ export const execute = async ({
       lang,
       input,
     };
-    const res = await axiosInstance.put(`execute`, requestBody);
+    const res = await axiosInstance.post(`execute`, requestBody);
     return res.data as ExecuteResponse;
   } catch (e) {
     console.error(e);
