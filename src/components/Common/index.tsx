@@ -15,14 +15,13 @@ type Props = {
 
 export const Button = ({ text, onClick }: Props) => (
   <button className="btn btn-style py-[2px]" onClick={onClick}>
-    {text && <span className="ml-2 ">{text}</span>}
+    {text && <span>{text}</span>}
   </button>
 );
 
 export const PlayButton = ({ onClick }: Props) => (
   <button className="btn play-btn-style" onClick={onClick}>
-    <span className="mr-2 py-[2px] text-lg">▶</span>
-    <span className="py-[2px]">Play</span>
+    <span className="py-[2px]">Run</span>
   </button>
 );
 
@@ -70,9 +69,7 @@ export const DropDownTheme = ({ onChange, value }: DropDownThemeProps) => (
 );
 
 export const Loader = () => (
-  <div
-    className="absolute ml-[40%] mt-[5%]  flex flex-wrap p-5"
-  >
+  <div className="absolute ml-[40%] mt-[5%]  flex flex-wrap p-5">
     <span className="h-5 w-5 animate-loading1 rounded-full  bg-[#f15c6c]" />
     <span className="h-5 w-5 animate-loading2 rounded-full bg-[#f15c6c]" />
     <span className="h-5 w-5 animate-loading3 rounded-full bg-[#f15c6c]" />
