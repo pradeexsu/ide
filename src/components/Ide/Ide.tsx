@@ -12,12 +12,12 @@ const Ide = () => {
       <IOBar />
       <footer className="absolute bottom-0 right-0 mb-6 mr-6 text-white">
         <div>
-          created by{" "}
+          visit{" "}
           <a
-            href="https://github.com/pradeexsu"
+            href="https://pradeexsu.github.io"
             className="hover:text-purple-500"
           >
-            @pradeexsu
+            pradeexsu.github.io
           </a>
         </div>
       </footer>
