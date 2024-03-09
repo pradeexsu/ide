@@ -57,7 +57,7 @@
     "@codemirror/view": "^6.14.1",
     "@tippyjs/react": "^4.2.6",
     "allotment": "^1.19.0",
-    "axios": "^1.4.0",
+    "axios": "^1.6.7",
     "cm6-theme-basic-dark": "^0.2.0",
     "cm6-theme-basic-light": "^0.2.0",
     "cm6-theme-material-dark": "^0.2.0",
